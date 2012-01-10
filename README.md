@@ -1,6 +1,13 @@
 # jsTmpl
 
+## What is it about?
+
 jsTmpl is a lightweight template engine, specifically designed to perform client-side rendering, returning document fragments which can be directly inserted into the document. The syntax is strongly inspired in jQuery templates, in order to facilitate learning and portability, if desired.
+
+
+## Licensing
+
+jsTmpl is released under the MIT license.
 
 ## Characteristics
 
