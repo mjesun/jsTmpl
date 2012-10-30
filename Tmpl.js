@@ -91,8 +91,6 @@ var Tmpl = (function(window, document) {
 		// Define handler.
 		xhrHandler = function() {
 			if ((xhr.readyState === 4) && (xhr.status === 200)) {
-				xhr.onreadystatechange = null;
-				
 				// Switch depending on the extension.
 				switch (extension) {
 				case 'tpl': // Source template.
@@ -110,6 +108,10 @@ var Tmpl = (function(window, document) {
 				default:
 					throw new Error('Invalid template format detected: ' + extension);
 				}
+				
+				// Ensure that the resources are freed.
+				xhr.onreadystatechange = null;
+				xhr = null;
 			}
 		};
 		
