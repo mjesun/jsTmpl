@@ -45,7 +45,7 @@ var Tmpl = (function(window, document) {
 		var parser = document.createElement('div');
 		var html5 = 'abbr article aside audio canvas datalist details figcaption figure footer header hgroup mark meter nav output progress section summary time video'.split(' ');
 		
-		// Enable HTML5 elements in IE.
+		//Enable HTML5 elements in IE.
 		if ('createElement' in fragment) {
 			for (var i = html5.length; i--; ) {
 				fragment.createElement(html5[i]);
@@ -88,20 +88,20 @@ var Tmpl = (function(window, document) {
 		var xhr = window.XMLHttpRequest? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 		var xhrHandler;
 		
-		// Define handler.
+		//Define handler.
 		xhrHandler = function() {
 			if ((xhr.readyState === 4) && (xhr.status === 200)) {
-				// Switch depending on the extension.
+				//Switch depending on the extension.
 				switch (extension) {
-				case 'tpl': // Source template.
+				case 'tpl': //Source template.
 					load(name, xhr.responseText);
 					break;
 				
-				case 'tpc': // Compiled template.
+				case 'tpc': //Compiled template.
 					cache[name] = (new Function('$data', xhr.responseText)).bind(tplScope);
 					break;
 				
-				case 'tpx': // Collection of compiled templates.
+				case 'tpx': //Collection of compiled templates.
 					tplCollection(xhr.responseText);
 					break;
 					
@@ -109,13 +109,13 @@ var Tmpl = (function(window, document) {
 					throw new Error('Invalid template format detected: ' + extension);
 				}
 				
-				// Ensure that the resources are freed.
+				//Ensure that the resources are freed.
 				xhr.onreadystatechange = null;
 				xhr = null;
 			}
 		};
 		
-		// Perform the HTTP request.
+		//Perform the HTTP request.
 		xhr.open('GET', src, true);
 		xhr.onreadystatechange = xhrHandler;
 		xhr.send(null);
@@ -179,7 +179,7 @@ var Tmpl = (function(window, document) {
 					var p1, p2;
 					var code;
 					
-					// Create params list.
+					//Create params list.
 					params = (param && param.split(/\s*,\s*/g)) || [];
 					params = params.concat((defaultParams[op] || []).slice(params.length));
 					
@@ -187,7 +187,7 @@ var Tmpl = (function(window, document) {
 					p1 = params[0];
 					p2 = params[1];
 					
-					// Switch depending on the operator.
+					//Switch depending on the operator.
 					switch (op) {
 					case '!':
 						code = '';
@@ -259,7 +259,7 @@ var Tmpl = (function(window, document) {
 			'")}return this.c(this.p($$.join("")), $$.n);'
 		].join('').replace(REMOVE_EMPTY_PUSHES, function(match, empty) { return empty? '' : match; });
 		
-		// Return compiled code.
+		//Return compiled code.
 		return compiled;
 	}
 	
@@ -275,24 +275,24 @@ var Tmpl = (function(window, document) {
 		var sandbox = PARSER;
 		var el;
 		
-		// Set HTML.
+		//Set HTML.
 		PARSER.innerHTML = wrap? [wrap[1], html, wrap[2]].join('') : html;
 		
-		// Look for the node.
+		//Look for the node.
 		for (var i = (wrap && wrap[0]) || 0; i--; )  {
 			sandbox = sandbox.firstChild;
 		}
 		
-		// Extract children.
+		//Extract children.
 		while (el = sandbox.firstChild) {
 			fragment.appendChild(el);
 		}
 		
-		// Empty parser and free memory.
+		//Empty parser and free memory.
 		PARSER.innerHTML = '';
 		el = null;
 		
-		// Return fragment.
+		//Return fragment.
 		return fragment;
 	}
 	
@@ -350,7 +350,7 @@ var Tmpl = (function(window, document) {
 	}
 	
 	
-	// Create private special scope for template functions.
+	//Create private special scope for template functions.
 	var tplScope = {
 		't': template,
 		'p': parse,
@@ -360,7 +360,7 @@ var Tmpl = (function(window, document) {
 	};
 	
 	
-	// Export public methods outside.
+	//Export public methods outside.
 	return {
 		load: load,
 		loadXhr: loadXhr,
