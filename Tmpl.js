@@ -350,6 +350,19 @@ var Tmpl = (function(window, document) {
 	}
 	
 	
+	/**
+	 * Public method exposed for being able to change the warning method. Specially
+	 * useful for logging errors in production; or for testing purposes.
+	 */
+	function setWarn(method) {
+		if (typeof method === 'function') {
+			tplScope['w'] = method;
+		} else {
+			tplScope['w'] = warn;
+		}
+	}
+	
+	
 	//Create private special scope for template functions.
 	var tplScope = {
 		't': template,
@@ -365,6 +378,7 @@ var Tmpl = (function(window, document) {
 		load: load,
 		loadXhr: loadXhr,
 		template: template,
-		compile: compile
+		compile: compile,
+		setWarn: setWarn
 	};
 })(window, document);
